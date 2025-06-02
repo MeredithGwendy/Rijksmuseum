@@ -20,14 +20,18 @@ jobs:
           node-version: '20'
 
       - name: Install Newman
-        run: npm install -g newman
+        run: 
+          npm install -g newman
+          npm install -g newman-reporter-html
 
       - name: Run Postman collection and show result
         run: |
           echo "🚀 Start Postman tests..."
 
           set +e
-          newman run collections/Rijksmuseum.postman_collection.json --reporters cli
+          newman run collections/Rijksmuseum.postman_collection.json \
+            --reporters cli,html \
+            --reporter-html-export test-report.html
           exit_code=$?
           set -e
 
@@ -37,3 +41,10 @@ jobs:
             echo "❌ FAILED: One or more Postman API tests failed."
             exit 1
           fi
+
+      - name: Upload HTML report as artefact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Html-report
+          path: test-report.html
