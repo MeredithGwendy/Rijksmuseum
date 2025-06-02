@@ -1,0 +1,37 @@
+name: Meredith assessment
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  run-postman-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+		
+	  - name: Installeer Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Installeer Newman
+        run: |
+          npm install -g newman
+
+      - name: Voer Postman-collectie uit en toon resultaat
+        run: |
+          echo "Start Postman tests..."
+          
+          newman run collections/Rijksmuseum.postman_collection.json --reporters cli
+          exit_code=$?
+
+          if [ $exit_code -eq 0 ]; then
+            echo "✅ PASSED: Alle Postman API-tests zijn geslaagd."
+          else
+            echo "❌ FAILED: Eén of meer Postman API-tests zijn mislukt."
+            exit 1
+          fi

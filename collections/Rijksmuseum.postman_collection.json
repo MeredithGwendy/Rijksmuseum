@@ -1,0 +1,330 @@
+{
+	"info": {
+		"_postman_id": "63681c10-1e3a-45f8-b02b-7956779d5af3",
+		"name": "Rijksmuseum",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2664553"
+	},
+	"item": [
+		{
+			"name": "Collection",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.rijksmuseum.nl/api/nl/collection?key=0fiuZFh4&format=json",
+					"protocol": "https",
+					"host": [
+						"www",
+						"rijksmuseum",
+						"nl"
+					],
+					"path": [
+						"api",
+						"nl",
+						"collection"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "0fiuZFh4"
+						},
+						{
+							"key": "format",
+							"value": "json"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Rembrandt",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"amount artObjects is 5\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.artObjects.length).to.eql(5);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.rijksmuseum.nl/api/en/collection?key=0fiuZFh4&format=json&involvedMaker=Rembrandt+van+Rijn&ps=5",
+					"protocol": "https",
+					"host": [
+						"www",
+						"rijksmuseum",
+						"nl"
+					],
+					"path": [
+						"api",
+						"en",
+						"collection"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "0fiuZFh4"
+						},
+						{
+							"key": "format",
+							"value": "json"
+						},
+						{
+							"key": "involvedMaker",
+							"value": "Rembrandt+van+Rijn"
+						},
+						{
+							"key": "ps",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Rembrandt - 0 pages",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Amount artObjects is 0\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.artObjects.length).to.eql(0);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.rijksmuseum.nl/api/en/collection?key=0fiuZFh4&format=json&q=Rembrandt&ps=0",
+					"protocol": "https",
+					"host": [
+						"www",
+						"rijksmuseum",
+						"nl"
+					],
+					"path": [
+						"api",
+						"en",
+						"collection"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "0fiuZFh4"
+						},
+						{
+							"key": "format",
+							"value": "json"
+						},
+						{
+							"key": "q",
+							"value": "Rembrandt"
+						},
+						{
+							"key": "ps",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Rembrandt - 33 pages",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Amount artObjects is 33\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.artObjects.length).to.eql(33);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.rijksmuseum.nl/api/en/collection?key=0fiuZFh4&format=json&q=Rembrandt&ps=33",
+					"protocol": "https",
+					"host": [
+						"www",
+						"rijksmuseum",
+						"nl"
+					],
+					"path": [
+						"api",
+						"en",
+						"collection"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "0fiuZFh4"
+						},
+						{
+							"key": "format",
+							"value": "json"
+						},
+						{
+							"key": "q",
+							"value": "Rembrandt"
+						},
+						{
+							"key": "ps",
+							"value": "33"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Blabla",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"No results, but valid respons\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.artObjects.length).to.eql(0);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.rijksmuseum.nl/api/en/collection?key=0fiuZFh4&format=json&q=Blabla",
+					"protocol": "https",
+					"host": [
+						"www",
+						"rijksmuseum",
+						"nl"
+					],
+					"path": [
+						"api",
+						"en",
+						"collection"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "0fiuZFh4"
+						},
+						{
+							"key": "format",
+							"value": "json"
+						},
+						{
+							"key": "q",
+							"value": "Blabla"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Object: Nachtwacht",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check that artObject has title, webImage, and description\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    const artObject = jsonData.artObject;\r",
+							"\r",
+							"    // Check required fields\r",
+							"    pm.expect(artObject).to.have.property(\"title\");\r",
+							"    pm.expect(artObject).to.have.property(\"webImage\");\r",
+							"    pm.expect(artObject.webImage).to.have.property(\"url\");\r",
+							"    pm.expect(artObject).to.have.property(\"description\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.rijksmuseum.nl/api/nl/collection/SK-C-5?key=0fiuZFh4",
+					"protocol": "https",
+					"host": [
+						"www",
+						"rijksmuseum",
+						"nl"
+					],
+					"path": [
+						"api",
+						"nl",
+						"collection",
+						"SK-C-5"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "0fiuZFh4"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
