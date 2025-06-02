@@ -24,10 +24,12 @@ jobs:
 
       - name: Run Postman collection and show result
         run: |
-          echo "Start Postman tests..."
+          echo "🚀 Start Postman tests..."
 
+          set +e
           newman run collections/Rijksmuseum.postman_collection.json --reporters cli
           exit_code=$?
+          set -e
 
           if [ $exit_code -eq 0 ]; then
             echo "✅ PASSED: All Postman API tests passed."
